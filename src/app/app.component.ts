@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'trial-tracker-main-page';
+
+  pageDisplayed = "drawer"
+
+  onNavigatePage(page: string) {
+    this.pageDisplayed = page;
+  }
 }
