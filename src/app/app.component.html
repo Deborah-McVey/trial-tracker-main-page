@@ -1,10 +1,12 @@
 <div class="container">
-	<app-navigation (currentPage)="onNavigatePage($event)"></app-navigation>
+  <!-- (currentPage)="onNavigatePage($event)" -->
+	<app-navigation></app-navigation>
 	<div class="row">
 		<div class="col-md-10 mx-auto">
-			<app-drawer *ngIf="pageDisplayed === 'drawer'"></app-drawer>
+			<!-- <app-drawer *ngIf="pageDisplayed === 'drawer'"></app-drawer>
 			<hr />
-			<app-cabinet *ngIf="pageDisplayed === 'cabinet'"></app-cabinet>
-		</div>
+			<app-cabinet *ngIf="pageDisplayed === 'cabinet'"></app-cabinet> -->
+        <router-outlet></router-outlet>
+    </div>
 	</div>
 </div>

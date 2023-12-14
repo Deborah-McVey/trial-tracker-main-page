@@ -23,6 +23,11 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { DataComponent } from './shared/data/data.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { DataFormDialogComponent } from './data-form-dialog/data-form-dialog.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DrawerHomeComponent } from './drawer/drawer-home/drawer-home.component';
+import { DrawerEditorComponent } from './drawer/drawer-editor/drawer-editor.component';
+import { AddSubscriptionDialogComponent } from './add-subscription-dialog/add-subscription-dialog.component';
+import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import { DataFormDialogComponent } from './data-form-dialog/data-form-dialog.com
     NavigationComponent,
     DataComponent,
     ConfirmationDialogComponent,
-    DataFormDialogComponent
+    DataFormDialogComponent,
+    DrawerHomeComponent,
+    DrawerEditorComponent,
+    AddSubscriptionDialogComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
@@ -51,7 +60,8 @@ import { DataFormDialogComponent } from './data-form-dialog/data-form-dialog.com
     MatDialogModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

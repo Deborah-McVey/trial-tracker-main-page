@@ -7,16 +7,21 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" (click)="onSelectedPage('drawer')">Data Table</a>
+          <a class="nav-link active" aria-current="page" routerLink="/drawer" routerLinkActive="active">Data Table</a>
+          <!-- href="#" (click)="onSelectedPage('drawer')" -->
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelectedPage('cabinet')">Dashboard</a>
+          <a class="nav-link" routerLink="/cabinet" routerLinkActive="active">Dashboard</a>
+          <!-- href="#" (click)="onSelectedPage('cabinet')" -->
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Calendar</a>
         </li>
         <li class="nav-item dropdown" appDropdown>
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" type="button" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User<img class="profile-picture" src="./assets/img/freckles250x250.jpg" alt="Profile Picture">
+          <!-- href="#" -->
+          <a class="nav-link dropdown-toggle" style="cursor: pointer" id="navbarDropdownMenuLink" type="button" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [attr.aria-expanded]="show"
+          (click)="show = !show"
+          [class.show]="show">User<img class="profile-picture" src="./assets/img/freckles250x250.jpg" alt="Profile Picture">
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#">See Profile</a></li>

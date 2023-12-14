@@ -16,6 +16,8 @@ import { Data } from 'src/app/shared/data/data.model';
   styleUrls: ['./data-results.component.css']
 })
 export class DataResultsComponent implements OnInit, OnDestroy, AfterViewInit {
+  allData: Data[] = [];
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

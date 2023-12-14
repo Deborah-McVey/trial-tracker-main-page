@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,11 +15,13 @@ import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirm
 import { DataFormDialogComponent } from 'src/app/data-form-dialog/data-form-dialog.component';
 import { DataService } from 'src/app/shared/data/data.service';
 import { Data } from 'src/app/shared/data/data.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AddSubscriptionDialogComponent } from 'src/app/add-subscription-dialog/add-subscription-dialog.component';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.css']
+  styleUrls: ['./data-table.component.css'],
 })
 export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,17 +40,34 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   public dataSource: MatTableDataSource<Data>;
   private serviceSubscribe: Subscription;
 
-  constructor(private dataService: DataService, public dialog: MatDialog) {
+  constructor(
+    private dataService: DataService,
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.dataSource = new MatTableDataSource<Data>();
+  }
+
+  openDialog() {
+    /* this.router.navigate(['new'], { relativeTo: this.route }); */
+    this.dialog.open(AddSubscriptionDialogComponent, {
+      width: '400px',
+    });
+    /*  dialog.afterClosed().subscribe(result => {
+    if (result) {
+      this.dataService.add(result);
+    }
+  }); */
   }
 
   edit(data: Data) {
     const dialogRef = this.dialog.open(DataFormDialogComponent, {
       width: '400px',
-      data: data
+      data: data,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataService.edit(result);
       }
@@ -52,7 +77,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataService.remove(id);
       }
@@ -69,39 +94,35 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   ngOnInit(): void {
     this.dataService.getAll();
-    this.serviceSubscribe = this.dataService.data$.subscribe(res => {
+    this.serviceSubscribe = this.dataService.data$.subscribe((res) => {
       this.dataSource.data = res;
-    })
+    });
   }
 
   ngOnDestroy(): void {
     this.serviceSubscribe.unsubscribe();
   }
   private filter() {
-
     this.dataSource.filterPredicate = (data: Data, filter: string) => {
-
       let find = true;
 
       for (var columnName in this.columnsFilters) {
-
-        let currentData = "" + data[columnName];
+        let currentData = '' + data[columnName];
 
         //if there is no filter, jump to next loop, otherwise do the filter.
         if (!this.columnsFilters[columnName]) {
           return;
         }
 
-        let searchValue = this.columnsFilters[columnName]["contains"];
+        let searchValue = this.columnsFilters[columnName]['contains'];
 
-        if (!!searchValue && currentData.indexOf("" + searchValue) < 0) {
-
+        if (!!searchValue && currentData.indexOf('' + searchValue) < 0) {
           find = false;
           //exit loop
           return;
         }
 
-        searchValue = this.columnsFilters[columnName]["equals"];
+        searchValue = this.columnsFilters[columnName]['equals'];
 
         if (!!searchValue && currentData != searchValue) {
           find = false;
@@ -109,7 +130,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
 
-        searchValue = this.columnsFilters[columnName]["greaterThan"];
+        searchValue = this.columnsFilters[columnName]['greaterThan'];
 
         if (!!searchValue && currentData <= searchValue) {
           find = false;
@@ -117,7 +138,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
 
-        searchValue = this.columnsFilters[columnName]["lessThan"];
+        searchValue = this.columnsFilters[columnName]['lessThan'];
 
         if (!!searchValue && currentData >= searchValue) {
           find = false;
@@ -125,24 +146,23 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
 
-        searchValue = this.columnsFilters[columnName]["startWith"];
+        searchValue = this.columnsFilters[columnName]['startWith'];
 
-        if (!!searchValue && !currentData.startsWith("" + searchValue)) {
+        if (!!searchValue && !currentData.startsWith('' + searchValue)) {
           find = false;
           //exit loop
           return;
         }
 
-        searchValue = this.columnsFilters[columnName]["endWith"];
+        searchValue = this.columnsFilters[columnName]['endWith'];
 
-        if (!!searchValue && !currentData.endsWith("" + searchValue)) {
+        if (!!searchValue && !currentData.endsWith('' + searchValue)) {
           find = false;
           //exit loop
           return;
         }
       }
       return find;
-
     };
 
     this.dataSource.filter = null;
@@ -160,7 +180,6 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
    */
 
   applyFilter(columnName: string, operationType: string, searchValue: string) {
-
     this.columnsFilters[columnName] = {};
     this.columnsFilters[columnName][operationType] = searchValue;
     this.filter();

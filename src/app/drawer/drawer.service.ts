@@ -5,6 +5,9 @@ import { Data } from "../shared/data/data.model";
   providedIn: "root"
 })
 export class DrawerService {
+  dataSelected = new EventEmitter<Data>();
+  dataTableChanged = new EventEmitter<Data[]>();
+
   private myData: Data[] = [
     new Data('Netflix', '12/31/2023', 'monthly', '$12.99'),
     new Data('Hulu', '12/31/2023', 'monthly', '$7.99'),
@@ -18,11 +21,8 @@ export class DrawerService {
     new Data('Barkbox', '12/31/2023', 'yearly', '$54.99')
   ];
 
-  dataSelected = new EventEmitter<Data>();
-  dataTableChanged = new EventEmitter<Data[]>();
-
-  // Read
-  getData() {
+   // Read
+  getData(idx: number) {
     return this.myData.slice();
   }
 
