@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { DrawerService } from '../drawer.service';
 
@@ -8,7 +8,8 @@ import { DrawerService } from '../drawer.service';
   styleUrls: ['./data-details.component.css']
 })
 export class DataDetailsComponent {
-  data: Data;
+  @Input() data: Data;
+  /* data: Data; */
   idx: number;
 
 constructor(

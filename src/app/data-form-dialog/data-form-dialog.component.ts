@@ -19,6 +19,7 @@ export class DataFormDialogComponent implements OnInit {
       "date": new FormControl('', Validators.required),
       "type": new FormControl('', Validators.required),
       "price": new FormControl('', Validators.required),
+      "category": new FormControl('', Validators.required)
     });
 
     this.formInstance.setValue(data);

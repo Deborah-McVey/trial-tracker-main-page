@@ -28,6 +28,7 @@
       findElem.date = data.date;
       findElem.type = data.type;
       findElem.price = data.price;
+      findElem.category = data.category;
 
       this.data$.next(this.data);
     }

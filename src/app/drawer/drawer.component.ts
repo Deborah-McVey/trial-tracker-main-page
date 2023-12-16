@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Data } from '../shared/data/data.model';
 
 @Component({
   selector: 'app-drawer',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./drawer.component.css']
 })
 export class DrawerComponent {
-
+  selectedData = Data;
 }

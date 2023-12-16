@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   OnDestroy,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -26,9 +28,15 @@ import { AddSubscriptionDialogComponent } from 'src/app/add-subscription-dialog/
 export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @Output() currentSelectedData = new EventEmitter<Data>();
 
-  public displayedColumns: string[] = ['company', 'date', 'type', 'price'];
+  handleSelectedData(data: Data) {
+    this.currentSelectedData.emit(data);
+  };
+
+  public displayedColumns: string[] = ['company', 'date', 'type', 'price', 'category'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
+/* columnsToDisplay is <app-data>
 
   /**
    * it holds a list of active filter for each column.

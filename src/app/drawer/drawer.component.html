@@ -1,10 +1,10 @@
 <div class="row justify-between">
-	<div>
+	<!-- <div class="col-md-6"> -->
 		<h1>My Saved Data</h1>
-		<app-data-table></app-data-table>
+		<app-data-table (currentSelectedData)="selectedData=$event"></app-data-table>
 	</div>
-	<!-- <div class="col-md-6">
-		<app-data-details></app-data-details>
-	</div> -->
+	<div class="col-md-6">
+		<app-data-details *ngIf="selectedData; else infoText" [data]="selectedData"></app-data-details>
+    <ng-template #infoText><p>Please select a service!</p></ng-template>
+	</div>
   <router-outlet></router-outlet>
-</div>

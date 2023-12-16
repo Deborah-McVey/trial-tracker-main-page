@@ -15,7 +15,7 @@
 
     <div class="mt-5">
       <mat-form-field class="fullWidth" appearance="outline">
-        <mat-label>Renewal Date</mat-label>
+        <mat-label>Billing Date</mat-label>
         <input matInput type="date" name="date" formControlName="date" />
         <mat-error *ngIf="formInstance.controls['date']?.errors?.required"
           >field required</mat-error
@@ -41,8 +41,22 @@
         <mat-label>Price</mat-label>
         <input matInput type="text" name="price" formControlName="price" />
         <mat-error *ngIf="formInstance.controls['price']?.errors?.required"
-          >field required</mat-error
-        >
+          >field required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-5">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select name="category" formControlName="category">
+          <mat-option value="streaming service">Streaming Service</mat-option>
+          <mat-option value="magazine">Magazine</mat-option>
+          <mat-option value="education">Education</mat-option>
+          <mat-option value="mail service">Mail Service</mat-option>
+                 </mat-select>
+        <mat-error *ngIf="formInstance.controls['category']?.errors?.required"
+          >field required
+        </mat-error>
       </mat-form-field>
     </div>
 
